@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "invoice"
+  "defaultProject": "invoice",
+  "cli": {
+    "analytics": false
+  }
 }
