@@ -7,7 +7,7 @@
           matInput
           placeholder="Invoice No:"
           formControlName="invoice_no"
-          #invoice_input
+          #invoice_no
         />
         <button
           type="button"
@@ -15,8 +15,8 @@
           matSuffix
           mat-raised-button
           color="warn"
-          *ngIf="invoice_input.value.length"
-          (click)="invoice_input.value = ''"
+          *ngIf="invoice_no.value.length"
+          (click)="invoice_no.value = ''"
         >
           <i class="bi bi-x"></i>
         </button>
@@ -26,6 +26,7 @@
           matInput
           placeholder="Comapany Name:"
           formControlName="company"
+          #company
         />
       </mat-form-field>
       <mat-radio-group class="w-50" formControlName="comapny_register">
@@ -33,10 +34,21 @@
         <mat-radio-button value="unregister">Unregister</mat-radio-button>
       </mat-radio-group>
       <mat-form-field class="w-50" *ngIf="gst_no_edit">
-        <input matInput placeholder="GST No:" formControlName="gst_no" />
+        <input
+          matInput
+          placeholder="GST No:"
+          formControlName="gst_no"
+          #gst_no
+        />
       </mat-form-field>
       <mat-form-field [ngClass]="gst_no_edit ? 'w-50' : 'w-100'">
-        <input matInput placeholder="Date:" formControlName="date" />
+        <input
+          type="date"
+          matInput
+          placeholder="Date:"
+          formControlName="date"
+          #date
+        />
       </mat-form-field>
       <mat-form-field class="w-10">
         <input matInput placeholder="S.N" formControlName="card_s" />
@@ -51,13 +63,19 @@
       <mat-form-field class="w-10">
         <input
           matInput
-          placeholder="Price"
-          formControlName="card_p"
-          [value]="card_p"
+          placeholder="Quantity"
+          formControlName="card_q"
+          #card_q
         />
       </mat-form-field>
       <mat-form-field class="w-20">
-        <input matInput placeholder="Quantity" formControlName="card_q" />
+        <input
+          matInput
+          placeholder="Price"
+          formControlName="card_p"
+          [value]="card_p"
+          #card_price
+        />
       </mat-form-field>
       <mat-form-field class="w-10">
         <input matInput placeholder="S.N" formControlName="holder_s" />
@@ -72,14 +90,21 @@
       <mat-form-field class="w-10">
         <input
           matInput
-          placeholder="Price"
-          formControlName="holder_p"
-          [value]="holder_p"
+          placeholder="Quantity"
+          formControlName="holder_q"
+          #holder_q
         />
       </mat-form-field>
       <mat-form-field class="w-20">
-        <input matInput placeholder="Quantity" formControlName="holder_q" />
+        <input
+          matInput
+          placeholder="Price"
+          formControlName="holder_p"
+          [value]="holder_p"
+          #holder_price
+        />
       </mat-form-field>
+
       <mat-form-field class="w-10">
         <input matInput placeholder="S.N" formControlName="lanyard_s" />
       </mat-form-field>
@@ -93,13 +118,19 @@
       <mat-form-field class="w-10">
         <input
           matInput
-          placeholder="Price"
-          formControlName="lanyard_p"
-          [value]="lanyard_p"
+          placeholder="Quantity"
+          formControlName="lanyard_q"
+          #lanyard_q
         />
       </mat-form-field>
       <mat-form-field class="w-20">
-        <input matInput placeholder="Quantity" formControlName="lanyard_q" />
+        <input
+          matInput
+          placeholder="Price"
+          formControlName="lanyard_p"
+          [value]="lanyard_p"
+          #lanyard_price
+        />
       </mat-form-field>
       <mat-form-field class="w-100">
         <mat-select placeholder="Select Location" formControlName="location">
@@ -116,73 +147,75 @@
       </mat-form-field>
       <div class="btn-group">
         <button type="submit" class="btn btn-primary">Submit</button>
-        <button class="btn btn-warning" (click)="onCancel()">Cancel</button>
+        <button type="button" class="btn btn-warning" (click)="onCancel()">
+          Cancel
+        </button>
       </div>
     </form>
   </div>
   <div class="col-md-12">
     <h3>Tax Invoice</h3>
-    <table class="table">
+    <!-- company detail -->
+    <table class="table company_detail">
       <thead>
         <tr>
-          <td colspan="4" [innerHTML]="admin.company_detail"></td>
-          <td colspan="3" [innerHTML]="admin.company_contact"></td>
+          <td [innerHTML]="admin.company_detail"></td>
+          <td [innerHTML]="admin.company_contact"></td>
         </tr>
         <tr>
-          <td colspan="4">Comapny: {{ invoiceForm.value.company }}</td>
-          <td colspan="3">Invoice No. {{ invoiceForm.value.invoice_no }}</td>
+          <td>Comapny: {{ company.value }}</td>
+          <td>Invoice No. {{ invoice_no.value }}</td>
         </tr>
         <tr>
-          <td colspan="4" *ngIf="!gst_no_edit"></td>
-          <td colspan="4" *ngIf="gst_no_edit">
-            GST No: {{ invoiceForm.value.gst_no }}
-          </td>
-          <td colspan="3">Date.: {{ invoiceForm.value.date }}</td>
+          <td *ngIf="!gst_no_edit"></td>
+          <td *ngIf="gst_no_edit">GST No: {{ invoiceForm.value.gst_no }}</td>
+          <td>Date.: {{ date.value }}</td>
         </tr>
+      </thead>
+    </table>
+    <!-- end company detail -->
+
+    <table class="table">
+      <thead>
         <tr>
           <th>S.No.</th>
           <th>Description</th>
           <th>HSN</th>
           <th>Quantity</th>
           <th>Rate</th>
-          <th colspan="2" class="text-right">Total</th>
+          <th class="text-end">Total</th>
         </tr>
       </thead>
       <tbody>
+        <!-- for cards -->
         <tr *ngIf="invoiceForm.value.card.viewValue != null">
           <td>{{ invoiceForm.value.card_s }}</td>
           <td>
-            {{ invoiceForm.value.card.viewValue }} <br />
-            <ul class="small">
-              <li *ngFor="let des of invoiceForm.value.card.desc">
-                {{ des.des }}
-              </li>
-            </ul>
+            {{ invoiceForm.value.card.viewValue }}
           </td>
           <td></td>
-          <td>{{ invoiceForm.value.card_q }}</td>
-          <td>{{ invoiceForm.value.card.price }}</td>
-          <td colspan="2" class="text-right">
-            {{ invoiceForm.value.card_q * invoiceForm.value.card.price }}
+          <td>{{ card_q.value }}</td>
+          <td>{{ card_price.value }}</td>
+          <td class="text-end">
+            {{ card_q.value * card_price.value }}
           </td>
         </tr>
+
+        <!-- for holder -->
         <tr *ngIf="invoiceForm.value.holder.viewValue != null">
           <td>{{ invoiceForm.value.holder_s }}</td>
           <td>
-            {{ invoiceForm.value.holder.viewValue }} <br />
-            <ul class="small">
-              <li *ngFor="let des of invoiceForm.value.holder.desc">
-                {{ des.des }}
-              </li>
-            </ul>
+            {{ invoiceForm.value.holder.viewValue }}
           </td>
           <td></td>
-          <td>{{ invoiceForm.value.holder_q }}</td>
-          <td>{{ invoiceForm.value.holder.price }}</td>
+          <td>{{ holder_q.value }}</td>
+          <td>{{ holder_price.value }}</td>
           <td colspan="2" class="text-right">
-            {{ invoiceForm.value.holder_q * invoiceForm.value.holder.price }}
+            {{ holder_q.value * holder_price.value }}
           </td>
         </tr>
+
+        <!-- for lanyard -->
         <tr *ngIf="invoiceForm.value.lanyard.viewValue != null">
           <td>{{ invoiceForm.value.lanyard_s }}</td>
           <td>
@@ -194,57 +227,76 @@
             </ul>
           </td>
           <td></td>
-          <td>{{ invoiceForm.value.lanyard_q }}</td>
-          <td>{{ invoiceForm.value.lanyard.price }}</td>
+          <td>{{ lanyard_q.value }}</td>
+          <td>{{ lanyard_price.value }}</td>
           <td colspan="2" class="text-right">
-            {{ invoiceForm.value.lanyard_q * invoiceForm.value.lanyard.price }}
+            {{ lanyard_q.value * lanyard_price.value }}
           </td>
         </tr>
+
+        <!-- Discount -->
         <tr *ngIf="discount_edit">
           <th colspan="5">Discount Price</th>
-          <th colspan="2" class="text-right">{{ discount }}</th>
+          <th class="text-end">{{ discount }}</th>
         </tr>
+
+        <!-- Total Before Tax -->
         <tr>
           <th colspan="5">Total before tax</th>
-          <th colspan="2" class="text-right">{{ priceBeforeTax }}</th>
+          <th class="text-end">{{ priceBeforeTax }}</th>
         </tr>
+      </tbody>
+    </table>
+
+    <!-- SCGST Table -->
+    <table class="table scgst_table">
+      <tbody>
+        <!-- SCGST -->
         <tr *ngIf="location_edit || location_edit_innter">
-          <th>S.No.</th>
-          <th colspan="2" class="text-center">CGST</th>
-          <th colspan="2" class="text-center">SGST</th>
-          <th colspan="2"></th>
+          <th></th>
+          <th colspan="2">CGST</th>
+          <th></th>
+          <th colspan="2">SGST</th>
+          <th></th>
         </tr>
         <tr *ngIf="location_edit || location_edit_innter">
           <td></td>
           <td>Rate</td>
           <td>Amount</td>
+          <td></td>
           <td>Rate</td>
           <td>Amount</td>
-          <td colspan="2"></td>
+          <td></td>
         </tr>
+
         <tr *ngIf="location_edit_innter">
-          <td>1</td>
+          <td></td>
           <td>9%</td>
           <td>{{ (card_gst + holder_gst + lanyard_gst).toFixed(2) }}</td>
+          <td></td>
           <td>9%</td>
-          <td>{{ (card_gst + holder_gst + lanyard_gst).toFixed(2) }}</td>
-          <td colspan="2"></td>
+          <td>
+            {{ (card_gst + holder_gst + lanyard_gst).toFixed(2) }}
+          </td>
+          <td></td>
         </tr>
+
         <tr *ngIf="location_edit && invoiceForm.value.card.viewValue != null">
           <td>{{ invoiceForm.value.card_s }}</td>
           <td>9%</td>
           <td>{{ card_gst }}</td>
+          <td></td>
           <td>9%</td>
           <td>{{ card_gst }}</td>
-          <td colspan="2"></td>
+          <td></td>
         </tr>
         <tr *ngIf="location_edit && invoiceForm.value.holder.viewValue != null">
           <td>{{ invoiceForm.value.holder_s }}</td>
           <td>9%</td>
           <td>{{ holder_gst }}</td>
+          <td></td>
           <td>9%</td>
           <td>{{ holder_gst }}</td>
-          <td></td>
           <td></td>
         </tr>
         <tr
@@ -253,106 +305,119 @@
           <td>{{ invoiceForm.value.lanyard_s }}</td>
           <td>9%</td>
           <td>{{ lanyard_gst }}</td>
+          <td></td>
           <td>9%</td>
           <td>{{ lanyard_gst }}</td>
           <td></td>
-          <td></td>
         </tr>
+
+        <!-- total tax -->
+        <tr *ngIf="location_edit || location_edit_innter" class="total_tax">
+          <th colspan="2">Total Tax</th>
+          <th>{{ (card_gst + holder_gst + lanyard_gst).toFixed(2) }}</th>
+          <th colspan="2"></th>
+          <th>{{ (card_gst + holder_gst + lanyard_gst).toFixed(2) }}</th>
+          <th>{{ total_tax.toFixed(2) }}</th>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- IGST Table-->
+    <table class="table igst_table">
+      <tbody>
         <tr *ngIf="location_edit2 || location_edit_innter2">
-          <th>S.No.</th>
-          <th class="text-center">IGST</th>
-          <th colspan="5"></th>
+          <th></th>
+          <th colspan="2">IGST</th>
+          <th></th>
         </tr>
         <tr *ngIf="location_edit2 || location_edit_innter2">
           <td></td>
           <td>Rate</td>
-          <td colspan="5">Amount</td>
+          <td>Amount</td>
+          <td></td>
         </tr>
         <tr *ngIf="location_edit_innter2">
-          <td>1</td>
+          <td></td>
           <td>18%</td>
-          <td colspan="5">
+          <td>
             {{ (card_igst + holder_igst + lanyard_igst).toFixed(2) }}
           </td>
+          <td></td>
         </tr>
         <tr *ngIf="location_edit2 && invoiceForm.value.card.viewValue != null">
           <td>{{ invoiceForm.value.card_s }}</td>
           <td>18%</td>
-          <td colspan="5">{{ card_igst }}</td>
+          <td>{{ card_igst }}</td>
+          <td></td>
         </tr>
         <tr
           *ngIf="location_edit2 && invoiceForm.value.holder.viewValue != null"
         >
           <td>{{ invoiceForm.value.holder_s }}</td>
           <td>18%</td>
-          <td colspan="5">{{ holder_igst }}</td>
+          <td>{{ holder_igst }}</td>
+          <td></td>
         </tr>
         <tr
           *ngIf="location_edit2 && invoiceForm.value.lanyard.viewValue != null"
         >
           <td>{{ invoiceForm.value.lanyard_s }}</td>
           <td>18%</td>
-          <td colspan="3">{{ lanyard_igst }}</td>
-          <td></td>
+          <td>{{ lanyard_igst }}</td>
           <td></td>
         </tr>
-        <tr *ngIf="location_edit || location_edit_innter">
-          <th colspan="2">Total Tax</th>
-          <th>{{ (card_gst + holder_gst + lanyard_gst).toFixed(2) }}</th>
-          <th></th>
-          <th>{{ (card_gst + holder_gst + lanyard_gst).toFixed(2) }}</th>
-          <th></th>
-          <th class="text-right">{{ total_tax.toFixed(2) }}</th>
-        </tr>
-        <tr *ngIf="location_edit2 || location_edit_innter2">
+
+        <!-- total tax -->
+        <tr *ngIf="location_edit2 || location_edit_innter2" class="total_tax">
           <th colspan="2">Total Tax</th>
           <th>{{ (card_igst + holder_igst + lanyard_igst).toFixed(2) }}</th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th class="text-right">{{ total_tax.toFixed(2) }}</th>
-        </tr>
-        <tr>
-          <th colspan="6">Gross Total</th>
-          <th class="text-right">{{ gross_total.toFixed() }}</th>
+          <th>{{ total_tax.toFixed(2) }}</th>
         </tr>
       </tbody>
     </table>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
+
+    <!-- Total Tax and Gross Total -->
     <table class="table">
-      <tr>
-        <th>Bank Details</th>
+      <tbody>
+        <tr>
+          <th colspan="5">Gross Total</th>
+          <th class="text-end">{{ gross_total.toFixed() }}</th>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- bank detail -->
+    <table class="table">
+      <tbody>
+        <tr>
+          <th style="background: none">Bank Details</th>
+        </tr>
+        <tr>
+          <td>
+            Bank Name: HDFC Bank <br />
+            Account Name: Creation Graphics <br />
+            Account No.: 03272000006608 <br />
+            IFSC Code: HDFC0000327 <br />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- terms and conditions -->
+    <table class="table">
+      <tr class="small">
+        <td colspan="2">Terms & Conditions</td>
       </tr>
-      <tr>
-        <td>
-          Bank Name: HDFC Bank <br />
-          Account Name: Creation Graphics <br />
-          Account No.: 03272000006608 <br />
-          IFSC Code: HDFC0000327 <br />
-        </td>
-      </tr>
-      <tr>
-        <th>Terms & Conditions</th>
-      </tr>
-      <tr>
-        <td>
+      <tr class="small">
+        <td colspan="2" style="height: 150px; vertical-align: top">
           1. Printing Quality/Color May be different. <br />
           2. Materials will be provided as per availability. <br />
           3. No Product will be replaced after delivery. <br />
         </td>
       </tr>
       <tr>
-        <th>Certified that the particular given above are true and correct</th>
-      </tr>
-      <tr>
-        <td>
-          <h4>For Creation Graphics</h4>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <h4>Authorised Signatory</h4>
-        </td>
+        <td>For Creation Graphics</td>
+        <td class="text-end">Authorised Signatory</td>
       </tr>
     </table>
   </div>

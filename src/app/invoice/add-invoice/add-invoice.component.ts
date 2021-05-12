@@ -55,6 +55,7 @@ export class AddInvoiceComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
+    private route: ActivatedRoute,
     private _authService: AuthService) { }
 
   ngOnInit(): void {
@@ -185,12 +186,12 @@ export class AddInvoiceComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(JSON.stringify(this.invoiceForm.value));
+    console.log(this.invoiceForm.value);
     window.print();
   }
 
   onCancel() {
-    this.router.navigateByUrl('../');
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   private initForm() {
