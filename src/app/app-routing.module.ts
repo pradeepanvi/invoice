@@ -7,9 +7,9 @@ import { ListInvoiceComponent } from './invoice/list-invoice/list-invoice.compon
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  // { path: '', component: LoginComponent },
   {
-    path: 'invoice', component: InvoiceComponent, children: [
+    path: '', component: InvoiceComponent, children: [
       { path: '', component: ListInvoiceComponent },
       { path: 'add-invoice', component: AddInvoiceComponent },
       { path: 'detail-invoice/:id', component: DetailInvoiceComponent }

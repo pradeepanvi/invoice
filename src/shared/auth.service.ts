@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   code = "http://localhost:4200/assets/code.json";
-  //code = "http://identitycards.co.in/invoice/assets/code.json";
+  // code = "http://invoice.identitycards.co.in/assets/code.json";
   loggedIn = false;
   user_detail: any;
 

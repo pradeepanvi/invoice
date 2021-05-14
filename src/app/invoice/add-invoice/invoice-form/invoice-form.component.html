@@ -1,0 +1,152 @@
+<div class="col-md-6 offset-md-3 print_hide">
+  <h3>Get Quatation</h3>
+  <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="w-100">
+      <input
+        matInput
+        placeholder="Invoice No:"
+        formControlName="invoice_no"
+        #invoice_no
+      />
+      <button
+        type="button"
+        mat-icon-button
+        matSuffix
+        mat-raised-button
+        color="warn"
+        *ngIf="invoice_no.value.length"
+        (click)="invoice_no.value = ''"
+      >
+        <i class="bi bi-x"></i>
+      </button>
+    </mat-form-field>
+    <mat-form-field class="w-50">
+      <input
+        matInput
+        placeholder="Comapany Name:"
+        formControlName="company"
+        #company
+      />
+    </mat-form-field>
+    <mat-radio-group
+      class="w-50"
+      formControlName="comapny_register"
+      [(ngModel)]="checkCompany"
+    >
+      <mat-radio-button value="register">Register</mat-radio-button>
+      <mat-radio-button value="unregister">Unregister</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field class="w-50" *ngIf="checkCompany == 'register'">
+      <input matInput placeholder="GST No:" formControlName="gst_no" #gst_no />
+    </mat-form-field>
+    <mat-form-field [ngClass]="checkCompany == 'register' ? 'w-50' : 'w-100'">
+      <input
+        type="date"
+        matInput
+        placeholder="Date:"
+        formControlName="date"
+        #date
+      />
+    </mat-form-field>
+    <div formGroupName="cardGroup">
+      <mat-form-field class="w-10">
+        <input matInput placeholder="S.N" value="1" disabled />
+      </mat-form-field>
+      <mat-form-field class="w-60">
+        <mat-select placeholder="Select Cards" formControlName="title">
+          <mat-option *ngFor="let card of formData?.cards" [value]="card">
+            {{ card.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-10">
+        <input matInput placeholder="Quantity" formControlName="quantity" />
+      </mat-form-field>
+      <mat-form-field class="w-20">
+        <input matInput placeholder="Price" formControlName="price" />
+      </mat-form-field>
+    </div>
+
+    <div formGroupName="holderGroup">
+      <mat-form-field class="w-10">
+        <input matInput placeholder="S.N" value="2" disabled />
+      </mat-form-field>
+      <mat-form-field class="w-60">
+        <mat-select placeholder="Select Holders" formControlName="title">
+          <mat-option *ngFor="let holder of formData?.holders" [value]="holder">
+            {{ holder.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-10">
+        <input
+          matInput
+          placeholder="Quantity"
+          formControlName="quantity"
+          #holder_q
+        />
+      </mat-form-field>
+      <mat-form-field class="w-20">
+        <input
+          matInput
+          placeholder="Price"
+          formControlName="price"
+          #holder_price
+        />
+      </mat-form-field>
+    </div>
+
+    <div formGroupName="lanyardGroup">
+      <mat-form-field class="w-10">
+        <input matInput placeholder="S.N" value="3" disabled />
+      </mat-form-field>
+      <mat-form-field class="w-60">
+        <mat-select placeholder="Select Lanyards" formControlName="title">
+          <mat-option
+            *ngFor="let lanyard of formData?.lanyards"
+            [value]="lanyard"
+          >
+            {{ lanyard.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-10">
+        <input
+          matInput
+          placeholder="Quantity"
+          formControlName="quantity"
+          #lanyard_q
+        />
+      </mat-form-field>
+      <mat-form-field class="w-20">
+        <input
+          matInput
+          placeholder="Price"
+          formControlName="price"
+          #lanyard_price
+        />
+      </mat-form-field>
+    </div>
+    <mat-form-field class="w-100">
+      <mat-select placeholder="Select Location" formControlName="location">
+        <mat-option
+          *ngFor="let location of formData?.locations"
+          [value]="location"
+        >
+          {{ location.state }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <input matInput placeholder="Discount" formControlName="discount" />
+    </mat-form-field>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary" (click)="onPrint()">
+        Submit
+      </button>
+      <button type="button" class="btn btn-warning" (click)="onCancel()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

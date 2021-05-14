@@ -15,6 +15,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
+import { InvoiceFormComponent } from './invoice/add-invoice/invoice-form/invoice-form.component';
+import { InvoiceTableComponent } from './invoice/add-invoice/invoice-table/invoice-table.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { MatRadioModule } from '@angular/material/radio';
     InvoiceComponent,
     ListInvoiceComponent,
     AddInvoiceComponent,
-    DetailInvoiceComponent
+    DetailInvoiceComponent,
+    InvoiceFormComponent,
+    InvoiceTableComponent
   ],
   imports: [
     BrowserModule,
