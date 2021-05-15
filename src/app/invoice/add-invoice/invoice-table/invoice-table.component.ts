@@ -20,6 +20,8 @@ export class InvoiceTableComponent implements OnInit {
   subscription$: Subscription;
   adminSubscription$: Subscription;
 
+  adminDetailSession: any;
+
   //GST
   card_gst = 0;
   holder_gst = 0;
@@ -45,15 +47,19 @@ export class InvoiceTableComponent implements OnInit {
         this.calculateTableData();
       }
     })
+    this.adminDetailSession = sessionStorage.getItem("adminDetail");
+    if (this.adminDetailSession) {
+      this.admin = JSON.parse(this.adminDetailSession)
+    }
     this.adminSubscription$ = this._globalService.getAdminDetail().subscribe(res => {
       if (res) {
         this.admin = res;
+        sessionStorage.setItem("adminDetail", JSON.stringify(res));
       }
     })
   }
 
   ngOnInit(): void {
-    // console.log(this.detailView);
   }
 
   private calculateTableData() {

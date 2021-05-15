@@ -14,6 +14,7 @@ export class InvoiceFormComponent implements OnInit {
   editModeId: any;
   subscription$: Subscription;
   adminSubscription$: Subscription;
+  adminDetailSession: any;
   invoiceForm = this.fb.group({});
   formData: any;
   checkCompany: any;
@@ -30,12 +31,16 @@ export class InvoiceFormComponent implements OnInit {
         this.initForm(res);
       }
     })
+    this.adminDetailSession = sessionStorage.getItem("adminDetail");
+    if (this.adminDetailSession) {
+      this.formData = JSON.parse(this.adminDetailSession)
+    }
     this.adminSubscription$ = this._globalService.getAdminDetail().subscribe(res => {
       if (res) {
         this.formData = res;
+        sessionStorage.setItem("adminDetail", JSON.stringify(res));
       }
     })
-
   }
 
   ngOnInit(): void {

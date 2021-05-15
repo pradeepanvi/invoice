@@ -34,7 +34,10 @@ export class AddInvoiceComponent implements OnInit {
       this.hideForm = false;
       this.editMode = true;
     }
-    this._globalService.setAdminDetail();
+    const adminDetail = sessionStorage.getItem("adminDetail");
+    if (!adminDetail) {
+      this._globalService.setAdminDetail();
+    }
   }
 
   // Buttons
