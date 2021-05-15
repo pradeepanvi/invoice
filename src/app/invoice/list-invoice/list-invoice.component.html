@@ -1,8 +1,9 @@
-<h3>Invoice</h3>
-<button class="btn btn-primary" (click)="add()">Add Invoice</button>
-<p>&nbsp;</p>
+<h3>Invoices</h3>
+<button mat-raised-button color="primary" type="button" (click)="add()">
+  Add Invoice
+</button>
 <div class="table-responsive">
-  <table class="table table-striped table-sm">
+  <table class="table table-sm">
     <thead>
       <tr>
         <th>S.N.</th>
@@ -15,12 +16,14 @@
         <td>{{ i }}</td>
         <td>{{ invoice.invoice_no }}</td>
         <td>
-          <div class="btn-group mr-2">
-            <button class="btn btn-sm btn-outline-secondary" (click)="view(i)">
+          <div class="btn-group">
+            <button mat-raised-button type="button" (click)="view(i)">
               View
             </button>
             <button
-              class="btn btn-sm btn-outline-secondary"
+              mat-raised-button
+              color="warn"
+              type="button"
               (click)="delete(i)"
             >
               Delete

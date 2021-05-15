@@ -9,7 +9,6 @@ export class GlobalService {
   code = "http://localhost:4200/assets/code.json";
   // code = "http://invoice.identitycards.co.in/assets/code.json";
 
-  adminData: any;
   firebaseAdmin = "https://creation-invoice-default-rtdb.firebaseio.com/admin";
   firebaseInvoice = "https://creation-invoice-default-rtdb.firebaseio.com/invoices";
   firebaseInvoiceList = 0;
@@ -35,6 +34,10 @@ export class GlobalService {
 
   getInvoice(id: any) {
     return this.http.get(`${this.firebaseInvoice}/${id}.json`);
+  }
+
+  deleteInvoice(restInvoiceData: any) {
+    return this.http.put(`${this.firebaseInvoice}.json`, restInvoiceData).subscribe(res => console.log(res));
   }
   setAdminDetail() {
     return this.http.get(`${this.firebaseAdmin}.json`).subscribe(res => this.adminData$.next(res));

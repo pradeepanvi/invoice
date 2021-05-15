@@ -13,6 +13,7 @@ export class InvoiceFormComponent implements OnInit {
   @Input() editMode: any;
   editModeId: any;
   subscription$: Subscription;
+  adminSubscription$: Subscription;
   invoiceForm = this.fb.group({});
   formData: any;
   checkCompany: any;
@@ -29,11 +30,15 @@ export class InvoiceFormComponent implements OnInit {
         this.initForm(res);
       }
     })
+    this.adminSubscription$ = this._globalService.getAdminDetail().subscribe(res => {
+      if (res) {
+        this.formData = res;
+      }
+    })
 
   }
 
   ngOnInit(): void {
-    this.formData = this._globalService.adminData;
     this.initForm();
     if (!this.editMode) {
       this._globalService.getInvoices().subscribe((res: any) => {
@@ -116,6 +121,7 @@ export class InvoiceFormComponent implements OnInit {
       this._globalService.saveFormData(this._globalService.firebaseInvoiceList, this.invoiceForm.value);
       this._globalService.firebaseInvoiceList++;
     }
+    this.router.navigate(['/'], { relativeTo: this.route });
   }
   onCancel() {
     if (this.editMode) {

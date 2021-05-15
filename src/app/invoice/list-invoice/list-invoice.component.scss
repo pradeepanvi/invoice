@@ -1,0 +1,25 @@
+h3 {
+  margin-top: 50px;
+}
+.table-responsive {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  table {
+    tbody {
+      tr {
+        td {
+          padding: 10px 0;
+          vertical-align: middle;
+          &:last-child {
+            text-align: right;
+          }
+          .btn-group {
+            button {
+              margin-left: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

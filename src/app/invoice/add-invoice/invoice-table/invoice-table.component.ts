@@ -145,5 +145,4 @@ export class InvoiceTableComponent implements OnInit {
   onEdit() {
     this.newEdit.emit();
   }
-  onDelete() { }
 }

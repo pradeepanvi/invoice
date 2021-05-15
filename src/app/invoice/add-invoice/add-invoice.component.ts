@@ -44,6 +44,4 @@ export class AddInvoiceComponent implements OnInit {
   onEdit() {
     this.router.navigate(['/edit-invoice/' + this.id], { relativeTo: this.route });
   }
-  onDelete() { }
-
 }

@@ -31,7 +31,8 @@ export class ListInvoiceComponent implements OnInit {
   }
 
   public delete(id: any) {
-    console.log(id);
+    this.invoice_list.splice(id, 1);
+    this._globalService.deleteInvoice(this.invoice_list);
   }
 
 }
