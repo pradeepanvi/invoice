@@ -141,11 +141,24 @@
       <input matInput placeholder="Discount" formControlName="discount" />
     </mat-form-field>
     <div class="btn-group">
-      <button type="button" class="btn btn-primary" (click)="onPrint()">
-        Submit
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="onPrint()"
+      >
+        Print
       </button>
-      <button type="button" class="btn btn-warning" (click)="onCancel()">
+      <button mat-raised-button type="button" (click)="onCancel()">
         Cancel
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="onSave()"
+      >
+        Save
       </button>
     </div>
   </form>

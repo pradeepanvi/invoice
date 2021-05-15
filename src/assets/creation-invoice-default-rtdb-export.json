@@ -1,0 +1,206 @@
+{
+  "admin": {
+    "user_detail": { "user": "creation", "password": "ckrishna" },
+    "company_detail": "<h4>Creation Graphics</h4> CN-61/117, BG-6, Sonia Camp<br> T-Hut, Paschim Vihar,<br> New Delhi 110063<br> GSTIN No.: 07BKGPK7828D1Z3",
+    "company_contact": "<h4>&nbsp;</h4> Phone No: +91-999-0571-016,<br> 9910537889<br> E-Mail: creationgraphicss@gmail.com<br> info@creationgraphicss.com<br>",
+    "bank_detail": "Bank Name: HDFC Bank <br />Account Name: Creation Graphics <br />Account No.: 03272000006608 <br />IFSC Code: HDFC0000327 <br />",
+    "terms_conditions": "1. Printing Quality/Color May be different. <br />2. Materials will be provided as per availability. <br />3. No Product will be replaced after delivery. <br />",
+    "lanyards": [
+      {
+        "price": 30,
+        "viewValue": "12mm Digital Lanyards",
+        "desc": [
+          { "des": "Non Washable Printing" },
+          { "des": "Both side printing" },
+          { "des": "Dog Hook" }
+        ]
+      },
+      {
+        "price": 35,
+        "viewValue": "16mm Digital Lanyards",
+        "desc": [
+          { "des": "Non Washable Printing" },
+          { "des": "Both side printing" },
+          { "des": "Dog Hook" }
+        ]
+      },
+      {
+        "price": 40,
+        "viewValue": "20mm Digital Lanyards",
+        "desc": [
+          { "des": "Non Washable Printing" },
+          { "des": "Both side printing" },
+          { "des": "Dog Hook" }
+        ]
+      },
+      {
+        "price": 10,
+        "viewValue": "Normal Offical Lanyards",
+        "desc": [
+          { "des": "Non Washable Printing" },
+          { "des": "Both side printing" },
+          { "des": "Dog Hook" }
+        ]
+      }
+    ],
+    "holders": [
+      {
+        "price": 5,
+        "viewValue": "Normal White Transparent Holders",
+        "desc": [
+          { "des": "Non Washable Printing" },
+          { "des": "Both side printing" },
+          { "des": "Dog Hook" }
+        ]
+      },
+      {
+        "price": 10,
+        "viewValue": "Double Sided Black Holders",
+        "desc": [
+          { "des": "Non Washable Printing" },
+          { "des": "Both side printing" },
+          { "des": "Dog Hook" }
+        ]
+      },
+      {
+        "price": 10,
+        "viewValue": "Double Sided White Transparent Holders",
+        "desc": [
+          { "des": "Non Washable Printing" },
+          { "des": "Both side printing" },
+          { "des": "Dog Hook" }
+        ]
+      }
+    ],
+    "cards": [
+      {
+        "price": 40,
+        "viewValue": "PVC Cards",
+        "desc": [
+          { "des": "Non Washable Printing" },
+          { "des": "Both side printing" },
+          { "des": "Dog Hook" }
+        ]
+      }
+    ],
+    "locations": [
+      { "state": "Intrastate", "value": "yes" },
+      { "state": "Interstate", "value": "no" },
+      { "state": "Intrastate - Separate Tax", "value": "delhi" },
+      { "state": "Interstate - Seperate Tax", "value": "other" }
+    ]
+  },
+  "invoices": [
+    {
+      "cardGroup": {
+        "price": 0,
+        "quantity": 1,
+        "title": {
+          "desc": [
+            {
+              "des": "Non Washable Printing"
+            },
+            {
+              "des": "Both side printing"
+            },
+            {
+              "des": "Dog Hook"
+            }
+          ],
+          "price": 40,
+          "viewValue": "PVC Cards"
+        }
+      },
+      "company": "",
+      "date": "",
+      "discount": 0,
+      "gst_no": "",
+      "holderGroup": {
+        "price": 0,
+        "quantity": 1,
+        "title": ""
+      },
+      "invoice_no": "",
+      "lanyardGroup": {
+        "price": 0,
+        "quantity": 1,
+        "title": ""
+      },
+      "location": "delhi"
+    },
+    {
+      "cardGroup": {
+        "price": 0,
+        "quantity": 1,
+        "title": {
+          "desc": [
+            {
+              "des": "Non Washable Printing"
+            },
+            {
+              "des": "Both side printing"
+            },
+            {
+              "des": "Dog Hook"
+            }
+          ],
+          "price": 40,
+          "viewValue": "PVC Cards"
+        }
+      },
+      "company": "Hellosss",
+      "date": "",
+      "discount": 0,
+      "gst_no": "",
+      "holderGroup": {
+        "price": 0,
+        "quantity": 1,
+        "title": ""
+      },
+      "invoice_no": "122",
+      "lanyardGroup": {
+        "price": 0,
+        "quantity": 1,
+        "title": ""
+      },
+      "location": "delhi"
+    },
+    {
+      "cardGroup": {
+        "price": 0,
+        "quantity": 1,
+        "title": {
+          "desc": [
+            {
+              "des": "Non Washable Printing"
+            },
+            {
+              "des": "Both side printing"
+            },
+            {
+              "des": "Dog Hook"
+            }
+          ],
+          "price": 40,
+          "viewValue": "PVC Cards"
+        }
+      },
+      "company": "Hellosss",
+      "date": "",
+      "discount": 0,
+      "gst_no": "",
+      "holderGroup": {
+        "price": 0,
+        "quantity": 1,
+        "title": ""
+      },
+      "invoice_no": "122",
+      "lanyardGroup": {
+        "price": 0,
+        "quantity": 1,
+        "title": ""
+      },
+      "location": "delhi"
+    }
+  ]
+}

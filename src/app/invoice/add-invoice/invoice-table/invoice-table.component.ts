@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { GlobalService } from 'src/shared/global.service';
 
@@ -8,12 +9,16 @@ import { GlobalService } from 'src/shared/global.service';
   styleUrls: ['./invoice-table.component.scss']
 })
 export class InvoiceTableComponent implements OnInit {
+  @Input() detailView: any;
+  @Output() newBack = new EventEmitter<any>();
+  @Output() newEdit = new EventEmitter<any>();
   admin: any;
   invoiceData: any;
   priceBeforeTax: any;
   total_tax = 0
   gross_total = 0;
   subscription$: Subscription;
+  adminSubscription$: Subscription;
 
   //GST
   card_gst = 0;
@@ -31,19 +36,24 @@ export class InvoiceTableComponent implements OnInit {
   location_edit_innter = false;
   location_edit_innter2 = false;
 
-
-  constructor(private _globalService: GlobalService) {
+  constructor(
+    private _globalService: GlobalService
+  ) {
     this.subscription$ = this._globalService.getFormData().subscribe(res => {
       if (res) {
-        console.log(res);
         this.invoiceData = res;
         this.calculateTableData();
+      }
+    })
+    this.adminSubscription$ = this._globalService.getAdminDetail().subscribe(res => {
+      if (res) {
+        this.admin = res;
       }
     })
   }
 
   ngOnInit(): void {
-    this._globalService.getAdminDetail().subscribe(res => this.admin = res);
+    // console.log(this.detailView);
   }
 
   private calculateTableData() {
@@ -127,4 +137,13 @@ export class InvoiceTableComponent implements OnInit {
     this.total_tax = (this.card_gst + this.holder_gst + this.lanyard_gst) + (this.card_gst + this.holder_gst + this.lanyard_gst) + (this.card_igst + this.holder_igst + this.lanyard_igst);
     this.gross_total = this.total_tax + this.priceBeforeTax;
   }
+
+  //Buttons
+  onBack() {
+    this.newBack.emit();
+  }
+  onEdit() {
+    this.newEdit.emit();
+  }
+  onDelete() { }
 }

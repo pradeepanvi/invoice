@@ -1,4 +1,8 @@
 <div class="row">
-  <app-invoice-form></app-invoice-form>
-  <app-invoice-table></app-invoice-table>
+  <app-invoice-form *ngIf="!hideForm" [editMode]="editMode"></app-invoice-form>
+  <app-invoice-table
+    [detailView]="hideForm"
+    (newBack)="onBack()"
+    (newEdit)="onEdit()"
+  ></app-invoice-table>
 </div>

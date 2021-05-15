@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/shared/auth.service';
+import { GlobalService } from 'src/shared/global.service';
 
 @Component({
   selector: 'app-list-invoice',
@@ -11,10 +10,16 @@ import { AuthService } from 'src/shared/auth.service';
 export class ListInvoiceComponent implements OnInit {
   invoice_list: any;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private _authService: AuthService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private _globalService: GlobalService) { }
 
   ngOnInit(): void {
-    this.http.get(this._authService.code).subscribe(res => this.invoice_list = res);
+    this._globalService.getInvoices().subscribe(res => {
+      this.invoice_list = res;
+      console.log(res);
+    })
   }
 
   public add() {
@@ -22,7 +27,7 @@ export class ListInvoiceComponent implements OnInit {
   }
 
   public view(id: any) {
-    this.router.navigate(['detail-invoice/' + id], { relativeTo: this.route });
+    this.router.navigate(['view-invoice/' + id], { relativeTo: this.route });
   }
 
   public delete(id: any) {

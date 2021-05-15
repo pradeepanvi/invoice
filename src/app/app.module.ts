@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { ListInvoiceComponent } from './invoice/list-invoice/list-invoice.component';
 import { AddInvoiceComponent } from './invoice/add-invoice/add-invoice.component';
-import { DetailInvoiceComponent } from './invoice/detail-invoice/detail-invoice.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
@@ -26,7 +25,6 @@ import { InvoiceTableComponent } from './invoice/add-invoice/invoice-table/invoi
     InvoiceComponent,
     ListInvoiceComponent,
     AddInvoiceComponent,
-    DetailInvoiceComponent,
     InvoiceFormComponent,
     InvoiceTableComponent
   ],
